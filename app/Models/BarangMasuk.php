@@ -3,8 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Models\Concerns\LogsActivity;
-use Spatie\Activitylog\Support\LogOptions;
+use App\Traits\LogsActivity;
 
 class BarangMasuk extends Model
 {
@@ -12,12 +11,6 @@ class BarangMasuk extends Model
 
     protected $guarded = [];
 
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-        ->logUnguarded()
-        ->setDescriptionForEvent(fn(string $eventName) => "Barang Masuk telah di {$eventName}");
-    }
 
     public function barang()
     {

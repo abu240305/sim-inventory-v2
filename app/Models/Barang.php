@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Models\Concerns\LogsActivity;
-use Spatie\Activitylog\Support\LogOptions;
+use App\Traits\LogsActivity;
 
 class Barang extends Model
 {
@@ -14,12 +13,6 @@ class Barang extends Model
     
     protected $guarded = [];
 
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-        ->logUnguarded()
-        ->setDescriptionForEvent(fn(string $eventName) => "Barang telah di {$eventName}");
-    }
 
     public function kategori()
     {

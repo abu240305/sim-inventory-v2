@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Models\Concerns\LogsActivity;
-use Spatie\Activitylog\Support\LogOptions;
+use App\Traits\LogsActivity;
 
 class Kategori extends Model
 {
@@ -13,12 +12,6 @@ class Kategori extends Model
 
     protected $fillable = ['nama_kategori'];
 
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-        ->logFillable()
-        ->setDescriptionForEvent(fn(string $eventName) => "Kategori telah di {$eventName}");
-    }
 
     public function barangs()
     {
