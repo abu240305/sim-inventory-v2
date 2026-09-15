@@ -21,14 +21,20 @@
 @section('page-script')
    <script>
       window.chartData = {
-         traffic: {
+         daily: {
+            labels: {!! json_encode($trafficDays) !!},
             masuk: {!! json_encode($trafficMasuk) !!},
             keluar: {!! json_encode($trafficKeluar) !!}
          },
-         health: {
-            months: {!! json_encode($healthMonths) !!},
-            masuk: {!! json_encode($healthMasuk) !!},
-            keluar: {!! json_encode($healthKeluar) !!}
+         weekly: {
+            labels: {!! json_encode($weeklyLabels) !!},
+            masuk: {!! json_encode($weeklyMasuk) !!},
+            keluar: {!! json_encode($weeklyKeluar) !!}
+         },
+         monthly: {
+            labels: {!! json_encode($monthlyLabels) !!},
+            masuk: {!! json_encode($monthlyMasuk) !!},
+            keluar: {!! json_encode($monthlyKeluar) !!}
          }
       };
    </script>
@@ -152,8 +158,20 @@
             <div class="row row-bordered g-0 h-100">
                <div class="col-md-7 col-12 order-2 order-md-0">
                   <div class="card-header d-flex align-items-center justify-content-between">
-                     <h5 class="mb-0">Transaksi 7 Hari Terakhir</h5>
-                     <small class="text-muted">Keluar & Masuk Barang</small>
+                     <div>
+                        <h5 class="mb-0" id="chartTitle">Grafik Transaksi (Harian)</h5>
+                        <small class="text-muted">Keluar & Masuk Barang</small>
+                     </div>
+                     <div class="dropdown">
+                        <button class="btn p-0" type="button" id="transactionFilter" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="ri-more-2-line ri-24px"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionFilter">
+                          <a class="dropdown-item" href="javascript:void(0);" onclick="window.updateTransactionChart('daily')">Harian</a>
+                          <a class="dropdown-item" href="javascript:void(0);" onclick="window.updateTransactionChart('weekly')">Mingguan</a>
+                          <a class="dropdown-item" href="javascript:void(0);" onclick="window.updateTransactionChart('monthly')">Bulanan</a>
+                        </div>
+                     </div>
                   </div>
                   <div class="card-body">
                      <div id="totalTransactionChart"></div>
@@ -219,18 +237,5 @@
          </div>
       </div>
 
-      <!-- Performance Chart -->
-      <div class="col-12 col-xxl-4 col-md-6">
-         <div class="card h-100">
-            <div class="card-header">
-               <div class="d-flex justify-content-between">
-                  <h5 class="mb-1">Tren Bulanan</h5>
-               </div>
-            </div>
-            <div class="card-body">
-               <div id="performanceChart"></div>
-            </div>
-         </div>
-      </div>
    </div>
 @endsection

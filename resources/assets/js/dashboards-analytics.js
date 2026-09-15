@@ -157,8 +157,8 @@
   const totalTransactionChartEl = document.querySelector('#totalTransactionChart'),
     totalTransactionChartConfig = {
       chart: {
-        height: 218,
-        stacked: true,
+        height: 250,
+        stacked: false,
         type: 'bar',
         parentHeightOffset: 0,
         toolbar: {
@@ -168,20 +168,24 @@
       tooltip: {
         y: {
           formatter: function (val) {
-            return Math.abs(val);
+            return Math.abs(val) + " Unit";
           }
         }
       },
-      legend: { show: false },
+      legend: {
+        show: true,
+        position: 'top',
+        horizontalAlign: 'left'
+      },
       dataLabels: { enabled: false },
-      colors: [config.colors.primary, config.colors.success],
+      colors: [config.colors.success, config.colors.primary],
       grid: {
         borderColor,
-        xaxis: { lines: { show: true } },
-        yaxis: { lines: { show: false } },
+        xaxis: { lines: { show: false } },
+        yaxis: { lines: { show: true } },
         padding: {
-          top: -5,
-          bottom: -25
+          top: 0,
+          bottom: 0
         }
       },
       states: {
@@ -190,141 +194,70 @@
       },
       plotOptions: {
         bar: {
-          borderRadius: 5,
-          barHeight: '30%',
-          horizontal: true,
-          endingShape: 'flat',
+          borderRadius: 4,
+          columnWidth: '40%',
+          horizontal: false,
+          endingShape: 'rounded',
           startingShape: 'rounded'
         }
       },
       xaxis: {
-        position: 'top',
-        axisTicks: { show: false },
-        axisBorder: { show: false },
-        categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        position: 'bottom',
+        axisTicks: { show: true },
+        axisBorder: { show: true },
+        categories: window.chartData ? window.chartData.daily.labels : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         labels: {
           style: {
             colors: labelColor,
             fontSize: '13px',
             fontFamily: 'Inter'
-          },
-          formatter: function (val) {
-            return Math.abs(Math.round(val));
           }
         }
       },
-      yaxis: { labels: { show: false } },
+      yaxis: { labels: { show: true } },
       series: [
         {
           name: 'Barang Masuk',
-          data: window.chartData ? window.chartData.traffic.masuk : [83, 153, 213, 279, 213, 153, 83]
+          data: window.chartData ? window.chartData.daily.masuk : [83, 153, 213, 279, 213, 153, 83]
         },
         {
           name: 'Barang Keluar',
-          data: window.chartData ? window.chartData.traffic.keluar : [-84, -156, -216, -282, -216, -156, -84]
+          data: window.chartData ? window.chartData.daily.keluar : [84, 156, 216, 282, 216, 156, 84]
         }
       ]
     };
   if (typeof totalTransactionChartEl !== undefined && totalTransactionChartEl !== null) {
     const totalTransactionChart = new ApexCharts(totalTransactionChartEl, totalTransactionChartConfig);
     totalTransactionChart.render();
+    
+    window.updateTransactionChart = function (type) {
+      let data, title;
+      if (type === 'daily') {
+         data = window.chartData.daily;
+         title = 'Grafik Transaksi (Harian)';
+      } else if (type === 'weekly') {
+         data = window.chartData.weekly;
+         title = 'Grafik Transaksi (Mingguan)';
+      } else if (type === 'monthly') {
+         data = window.chartData.monthly;
+         title = 'Grafik Transaksi (Bulanan)';
+      }
+      
+      const chartTitleEl = document.getElementById('chartTitle');
+      if(chartTitleEl) chartTitleEl.innerText = title;
+      
+      totalTransactionChart.updateSeries([
+        { name: 'Barang Masuk', data: data.masuk },
+        { name: 'Barang Keluar', data: data.keluar }
+      ]);
+      
+      totalTransactionChart.updateOptions({
+        xaxis: { categories: data.labels }
+      });
+    };
   }
 
-  // Performance Radar Chart
-  // --------------------------------------------------------------------
-  const performanceChartEl = document.querySelector('#performanceChart'),
-    performanceChartConfig = {
-      chart: {
-        height: 247,
-        type: 'radar',
-        toolbar: {
-          show: false
-        }
-      },
-      legend: {
-        show: true,
-        markers: { offsetX: -5, height: 10, width: 10 },
-        itemMargin: { horizontal: 16 },
-        fontFamily: 'Inter',
-        fontSize: '15px',
-        labels: {
-          colors: bodyColor,
-          useSeriesColors: false
-        }
-      },
-      plotOptions: {
-        radar: {
-          polygons: {
-            strokeColors: borderColor,
-            connectorColors: borderColor
-          }
-        }
-      },
-      yaxis: {
-        show: false
-      },
-      series: [
-        {
-          name: 'Barang Masuk',
-          data: window.chartData ? window.chartData.health.masuk : [70, 90, 80, 95, 75, 90]
-        },
-        {
-          name: 'Barang Keluar',
-          data: window.chartData ? window.chartData.health.keluar : [110, 72, 62, 65, 100, 75]
-        }
-      ],
-      colors: [config.colors.warning, config.colors.primary],
-      xaxis: {
-        categories: window.chartData ? window.chartData.health.months : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-        labels: {
-          show: true,
-          style: {
-            colors: [labelColor, labelColor, labelColor, labelColor, labelColor, labelColor],
-            fontSize: '15px',
-            fontFamily: 'Inter'
-          }
-        }
-      },
-      fill: {
-        opacity: [1, 0.9]
-      },
-      stroke: {
-        show: false,
-        width: 0
-      },
-      markers: {
-        size: 0
-      },
-      grid: {
-        show: false,
-        padding: {
-          top: 0,
-          bottom: -10
-        }
-      },
-      responsive: [
-        {
-          breakpoint: 1398,
-          options: {
-            chart: {
-              height: 287
-            }
-          }
-        },
-        {
-          breakpoint: 1200,
-          options: {
-            chart: {
-              height: 393
-            }
-          }
-        }
-      ]
-    };
-  if (typeof performanceChartEl !== undefined && performanceChartEl !== null) {
-    const performanceChart = new ApexCharts(performanceChartEl, performanceChartConfig);
-    performanceChart.render();
-  }
+
 
   // Total Revenue
   // --------------------------------------------------------------------
