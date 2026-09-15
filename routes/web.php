@@ -55,5 +55,16 @@ Route::middleware(['auth'])->group(function () {
     // System Status & Backup
     Route::get('system/health', [\App\Http\Controllers\SystemController::class, 'health'])->name('system.health')->middleware('check.permission:system.health');
     Route::get('system/backup', [\App\Http\Controllers\SystemController::class, 'backup'])->name('system.backup')->middleware('check.permission:system.health');
+
+    // SIM Inventaris Routes (Phase 1)
+    Route::resource('kategori', \App\Http\Controllers\KategoriController::class);
+    Route::resource('barang', \App\Http\Controllers\BarangController::class);
+    Route::resource('transaksi-masuk', \App\Http\Controllers\TransaksiMasukController::class)->only(['index', 'create', 'store']);
+    Route::resource('transaksi-keluar', \App\Http\Controllers\TransaksiKeluarController::class)->only(['index', 'create', 'store']);
+    
+    // SIM Inventaris Routes (Phase 2 - Laporan)
+    Route::get('laporan', [\App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('laporan/export/pdf', [\App\Http\Controllers\LaporanController::class, 'exportPdf'])->name('laporan.export.pdf');
+    Route::get('laporan/export/excel', [\App\Http\Controllers\LaporanController::class, 'exportExcel'])->name('laporan.export.excel');
 });
 

@@ -53,41 +53,81 @@
       </div>
       <!--/ Welcome Card -->
 
-      <!-- Quick Stats Role -->
+      <!-- Quick Stats Total Barang -->
       <div class="col-xxl-2 col-sm-6">
          <div class="card h-100">
             <div class="card-body">
                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
                   <div class="avatar">
                      <div class="avatar-initial bg-label-info rounded-3">
-                        <i class="ri-shield-user-line ri-24px"></i>
+                        <i class="ri-archive-line ri-24px"></i>
                      </div>
                   </div>
                </div>
                <div class="card-info mt-5">
-                  <h5 class="mb-1">{{ \App\Models\Role::count() }}</h5>
-                  <p>Total Roles</p>
-                  <div class="badge bg-label-secondary rounded-pill">System Roles</div>
+                  <h5 class="mb-1">{{ $totalBarang ?? 0 }}</h5>
+                  <p>Total Barang</p>
+                  <div class="badge bg-label-secondary rounded-pill">Master Data</div>
                </div>
             </div>
          </div>
       </div>
 
-      <!-- Quick Stats Users -->
+      <!-- Quick Stats Stok Menipis -->
       <div class="col-xxl-2 col-sm-6">
          <div class="card h-100">
             <div class="card-body">
                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
                   <div class="avatar">
-                     <div class="avatar-initial bg-label-primary rounded-3">
-                        <i class="ri-user-follow-line ri-24px"></i>
+                     <div class="avatar-initial bg-label-danger rounded-3">
+                        <i class="ri-error-warning-line ri-24px"></i>
                      </div>
                   </div>
                </div>
                <div class="card-info mt-5">
-                  <h5 class="mb-1">{{ \App\Models\User::count() }}</h5>
-                  <p>Total Users</p>
-                  <div class="badge bg-label-secondary rounded-pill">Active User</div>
+                  <h5 class="mb-1">{{ $stokMenipis ? $stokMenipis->count() : 0 }}</h5>
+                  <p>Stok Menipis</p>
+                  <div class="badge bg-label-danger rounded-pill">< 5 Unit</div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Quick Stats Masuk Bulan Ini -->
+      <div class="col-xxl-2 col-sm-6">
+         <div class="card h-100">
+            <div class="card-body">
+               <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                  <div class="avatar">
+                     <div class="avatar-initial bg-label-success rounded-3">
+                        <i class="ri-arrow-right-down-line ri-24px"></i>
+                     </div>
+                  </div>
+               </div>
+               <div class="card-info mt-5">
+                  <h5 class="mb-1">{{ $masukBulanIni ?? 0 }}</h5>
+                  <p>Barang Masuk</p>
+                  <div class="badge bg-label-success rounded-pill">Bulan Ini</div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Quick Stats Keluar Bulan Ini -->
+      <div class="col-xxl-2 col-sm-6">
+         <div class="card h-100">
+            <div class="card-body">
+               <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                  <div class="avatar">
+                     <div class="avatar-initial bg-label-warning rounded-3">
+                        <i class="ri-arrow-right-up-line ri-24px"></i>
+                     </div>
+                  </div>
+               </div>
+               <div class="card-info mt-5">
+                  <h5 class="mb-1">{{ $keluarBulanIni ?? 0 }}</h5>
+                  <p>Barang Keluar</p>
+                  <div class="badge bg-label-warning rounded-pill">Bulan Ini</div>
                </div>
             </div>
          </div>
