@@ -207,9 +207,11 @@
         axisBorder: { show: true },
         categories: window.chartData ? window.chartData.daily.labels : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         labels: {
+          rotate: -45,
+          hideOverlappingLabels: false,
           style: {
             colors: labelColor,
-            fontSize: '13px',
+            fontSize: '12px',
             fontFamily: 'Inter'
           }
         }

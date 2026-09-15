@@ -17,6 +17,7 @@ class DashboardController extends Controller
         $user = auth()->user();
         
         $totalBarang = Barang::count();
+        $totalStokFisik = Barang::sum('jumlah');
         $stokMenipis = Barang::where('jumlah', '<', 5)->get(); // ambang batas stok 5
         
         $bulanIni = Carbon::now()->month;
@@ -73,7 +74,7 @@ class DashboardController extends Controller
         }
 
         $data = compact(
-            'totalBarang', 'stokMenipis', 'masukBulanIni', 'keluarBulanIni',
+            'totalBarang', 'totalStokFisik', 'stokMenipis', 'masukBulanIni', 'keluarBulanIni',
             'trafficMasuk', 'trafficKeluar', 'trafficDays',
             'weeklyMasuk', 'weeklyKeluar', 'weeklyLabels',
             'monthlyMasuk', 'monthlyKeluar', 'monthlyLabels'

@@ -46,9 +46,9 @@
       <!-- Welcome Card -->
       <div class="col-md-12 col-xxl-8">
          <div class="card h-100">
-            <div class="d-flex align-items-end row h-100">
+            <div class="row h-100">
                <div class="col-md-6 order-2 order-md-1">
-                  <div class="card-body">
+                  <div class="card-body h-100 d-flex flex-column justify-content-center">
                      <h4 class="card-title mb-4">Selamat Datang, <span class="fw-bold">{{ auth()->user()->name }}!</span> 👑
                      </h4>
                      <p class="mb-5">Sistem siap digunakan. Anda memiliki akses penuh untuk mengelola master data,
@@ -72,88 +72,97 @@
       </div>
       <!--/ Welcome Card -->
 
-      <!-- Quick Stats Total Barang -->
-      <div class="col-xxl-2 col-sm-6">
-         <div class="card h-100">
-            <div class="card-body">
-               <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                  <div class="avatar">
-                     <div class="avatar-initial bg-label-info rounded-3">
-                        <i class="ri-archive-line ri-24px"></i>
+      <!-- Quick Stats Group -->
+      <div class="col-12 col-xxl-4">
+         <div class="row g-6">
+            <!-- Quick Stats Total Jenis Barang -->
+            <div class="col-sm-6">
+               <div class="card h-100">
+                  <div class="card-body">
+                     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                        <div class="avatar">
+                           <div class="avatar-initial bg-label-info rounded-3">
+                              <i class="ri-price-tag-3-line ri-24px"></i>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="card-info mt-4">
+                        <h5 class="mb-1">{{ $totalBarang ?? 0 }}</h5>
+                        <p>Total Jenis Barang</p>
+                        <div class="badge bg-label-secondary rounded-pill">Master Data</div>
                      </div>
                   </div>
-               </div>
-               <div class="card-info mt-5">
-                  <h5 class="mb-1">{{ $totalBarang ?? 0 }}</h5>
-                  <p>Total Barang</p>
-                  <div class="badge bg-label-secondary rounded-pill">Master Data</div>
                </div>
             </div>
-         </div>
-      </div>
 
-      <!-- Quick Stats Stok Menipis -->
-      <div class="col-xxl-2 col-sm-6">
-         <div class="card h-100">
-            <div class="card-body">
-               <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                  <div class="avatar">
-                     <div class="avatar-initial bg-label-danger rounded-3">
-                        <i class="ri-error-warning-line ri-24px"></i>
+            <!-- Quick Stats Sisa Stok Gudang -->
+            <div class="col-sm-6">
+               <div class="card h-100">
+                  <div class="card-body">
+                     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                        <div class="avatar">
+                           <div class="avatar-initial bg-label-primary rounded-3">
+                              <i class="ri-archive-stack-line ri-24px"></i>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="card-info mt-4">
+                        <h5 class="mb-1">{{ $totalStokFisik ?? 0 }}</h5>
+                        <p>Total Sisa Stok</p>
+                        @if($stokMenipis && $stokMenipis->count() > 0)
+                           <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#stokMenipisModal" class="badge bg-label-danger rounded-pill cursor-pointer">{{ $stokMenipis->count() }} Stok Menipis!</a>
+                        @else
+                           <div class="badge bg-label-success rounded-pill">Stok Aman</div>
+                        @endif
                      </div>
                   </div>
-               </div>
-               <div class="card-info mt-5">
-                  <h5 class="mb-1">{{ $stokMenipis ? $stokMenipis->count() : 0 }}</h5>
-                  <p>Stok Menipis</p>
-                  <div class="badge bg-label-danger rounded-pill">< 5 Unit</div>
                </div>
             </div>
-         </div>
-      </div>
 
-      <!-- Quick Stats Masuk Bulan Ini -->
-      <div class="col-xxl-2 col-sm-6">
-         <div class="card h-100">
-            <div class="card-body">
-               <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                  <div class="avatar">
-                     <div class="avatar-initial bg-label-success rounded-3">
-                        <i class="ri-arrow-right-down-line ri-24px"></i>
+            <!-- Quick Stats Masuk Bulan Ini -->
+            <div class="col-sm-6">
+               <div class="card h-100">
+                  <div class="card-body">
+                     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                        <div class="avatar">
+                           <div class="avatar-initial bg-label-success rounded-3">
+                              <i class="ri-arrow-right-down-line ri-24px"></i>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="card-info mt-4">
+                        <h5 class="mb-1">{{ $masukBulanIni ?? 0 }}</h5>
+                        <p>Barang Masuk</p>
+                        <div class="badge bg-label-success rounded-pill">Bulan Ini</div>
                      </div>
                   </div>
-               </div>
-               <div class="card-info mt-5">
-                  <h5 class="mb-1">{{ $masukBulanIni ?? 0 }}</h5>
-                  <p>Barang Masuk</p>
-                  <div class="badge bg-label-success rounded-pill">Bulan Ini</div>
                </div>
             </div>
-         </div>
-      </div>
 
-      <!-- Quick Stats Keluar Bulan Ini -->
-      <div class="col-xxl-2 col-sm-6">
-         <div class="card h-100">
-            <div class="card-body">
-               <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                  <div class="avatar">
-                     <div class="avatar-initial bg-label-warning rounded-3">
-                        <i class="ri-arrow-right-up-line ri-24px"></i>
+            <!-- Quick Stats Keluar Bulan Ini -->
+            <div class="col-sm-6">
+               <div class="card h-100">
+                  <div class="card-body">
+                     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                        <div class="avatar">
+                           <div class="avatar-initial bg-label-warning rounded-3">
+                              <i class="ri-arrow-right-up-line ri-24px"></i>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="card-info mt-4">
+                        <h5 class="mb-1">{{ $keluarBulanIni ?? 0 }}</h5>
+                        <p>Barang Keluar</p>
+                        <div class="badge bg-label-warning rounded-pill">Bulan Ini</div>
                      </div>
                   </div>
-               </div>
-               <div class="card-info mt-5">
-                  <h5 class="mb-1">{{ $keluarBulanIni ?? 0 }}</h5>
-                  <p>Barang Keluar</p>
-                  <div class="badge bg-label-warning rounded-pill">Bulan Ini</div>
                </div>
             </div>
          </div>
       </div>
 
       <!-- Performance & Projects (Placeholder of common admin view) -->
-      <div class="col-12 col-xxl-8">
+      <div class="col-12 col-xxl-12">
          <div class="card h-100">
             <div class="row row-bordered g-0 h-100">
                <div class="col-md-7 col-12 order-2 order-md-0">
@@ -237,5 +246,33 @@
          </div>
       </div>
 
+   </div>
+
+   <!-- Modal Stok Menipis -->
+   <div class="modal fade" id="stokMenipisModal" tabindex="-1" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="stokMenipisModalLabel">Daftar Barang Stok Menipis (< 5 Unit)</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body p-0">
+           <ul class="list-group list-group-flush">
+             @forelse($stokMenipis as $barang)
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                   {{ $barang->nama_barang }}
+                   <span class="badge bg-danger rounded-pill">{{ $barang->jumlah }} Unit</span>
+                </li>
+             @empty
+                <li class="list-group-item text-center">Semua stok aman.</li>
+             @endforelse
+           </ul>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+           <a href="{{ route('barang.index') }}" class="btn btn-primary">Ke Master Barang</a>
+         </div>
+       </div>
+     </div>
    </div>
 @endsection
