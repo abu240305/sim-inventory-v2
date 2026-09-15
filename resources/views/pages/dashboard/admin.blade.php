@@ -19,6 +19,19 @@
 @endsection
 
 @section('page-script')
+   <script>
+      window.chartData = {
+         traffic: {
+            masuk: {!! json_encode($trafficMasuk) !!},
+            keluar: {!! json_encode($trafficKeluar) !!}
+         },
+         health: {
+            months: {!! json_encode($healthMonths) !!},
+            masuk: {!! json_encode($healthMasuk) !!},
+            keluar: {!! json_encode($healthKeluar) !!}
+         }
+      };
+   </script>
    @vite(['resources/assets/js/dashboards-analytics.js'])
 @endsection
 

@@ -216,12 +216,12 @@
       yaxis: { labels: { show: false } },
       series: [
         {
-          name: 'Last Week',
-          data: [83, 153, 213, 279, 213, 153, 83]
+          name: 'Barang Masuk',
+          data: window.chartData ? window.chartData.traffic.masuk : [83, 153, 213, 279, 213, 153, 83]
         },
         {
-          name: 'This Week',
-          data: [-84, -156, -216, -282, -216, -156, -84]
+          name: 'Barang Keluar',
+          data: window.chartData ? window.chartData.traffic.keluar : [-84, -156, -216, -282, -216, -156, -84]
         }
       ]
     };
@@ -265,17 +265,17 @@
       },
       series: [
         {
-          name: 'Income',
-          data: [70, 90, 80, 95, 75, 90]
+          name: 'Barang Masuk',
+          data: window.chartData ? window.chartData.health.masuk : [70, 90, 80, 95, 75, 90]
         },
         {
-          name: 'Net Worth',
-          data: [110, 72, 62, 65, 100, 75]
+          name: 'Barang Keluar',
+          data: window.chartData ? window.chartData.health.keluar : [110, 72, 62, 65, 100, 75]
         }
       ],
       colors: [config.colors.warning, config.colors.primary],
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        categories: window.chartData ? window.chartData.health.months : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
         labels: {
           show: true,
           style: {
