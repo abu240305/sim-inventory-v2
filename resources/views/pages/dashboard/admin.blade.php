@@ -152,8 +152,8 @@
             <div class="row row-bordered g-0 h-100">
                <div class="col-md-7 col-12 order-2 order-md-0">
                   <div class="card-header d-flex align-items-center justify-content-between">
-                     <h5 class="mb-0">Traffic Overview</h5>
-                     <small class="text-muted">Updated 1 min ago</small>
+                     <h5 class="mb-0">Transaksi 7 Hari Terakhir</h5>
+                     <small class="text-muted">Keluar & Masuk Barang</small>
                   </div>
                   <div class="card-body">
                      <div id="totalTransactionChart"></div>
@@ -224,7 +224,7 @@
          <div class="card h-100">
             <div class="card-header">
                <div class="d-flex justify-content-between">
-                  <h5 class="mb-1">System Health</h5>
+                  <h5 class="mb-1">Tren Bulanan</h5>
                </div>
             </div>
             <div class="card-body">
