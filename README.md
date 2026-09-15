@@ -1,114 +1,93 @@
-# 🚀 Base Laravel - Enterprise Ready Template
+# Sistem Informasi Manajemen Inventaris Barang (SIM Inventaris)
 
-A modern Laravel starter template designed with **Service Repository Pattern**, **Audit Trail**, and **Powerful File Management**. Optimized for enterprise scalability and developer productivity.
-
----
-
-## 🌟 Key Features
-
--   🏗️ **Service Repository Pattern** - Clean, structured, and testable codebase.
--   🛡️ **Granular Role & Permission** - Robust RBAC (Role Based Access Control) down to per-menu actions (Create, Read, Update, Delete).
--   🕵️ **Activity Log (Audit Trail)** - Automatically track every data change with Before/After snapshots via Trait.
--   ⚙️ **Global Settings & Branding** - Manage App Name, Logo, Favicon, and System settings from the UI.
--   👤 **Personal Profile & Avatar** - Dedicated page for users to manage info, passwords, and profile pictures.
--   📊 **Role-Based Dashboards** - Specific views tailored for Administrators and regular Users.
--   �️‍♂️ **User Impersonation** - Super Admin can login as any user to troubleshoot issues without needing their password.
--   �📁 **File Upload Manager** - Centralized file handling with auto-resize and optimization.
--   🎨 **Premium Admin UI** - Powered by Sneat Bootstrap 5 with Dark/Light mode support.
--   🏥 **System Health Monitoring** - Built-in endpoints to monitor application and database status.
--   🤖 **Custom Code Generator** - Scaffold complete CRUD modules with a single command.
--   📖 **API Documentation** - Interactive Swagger (OpenAPI) docs out of the box.
--   🔔 **Global Alert System** - Pre-configured SweetAlert2 & Toastr integration.
+Aplikasi berbasis web untuk mendigitalisasi proses pencatatan, pelacakan, dan pelaporan barang, yang dikembangkan menggunakan **Laravel 11**.
 
 ---
 
-## 📁 Documentation Guide
+## 🚀 Panduan Instalasi (Menjalankan di Laptop Lain)
 
-For in-depth explanations of the features and how to use them, please refer to the following guides:
+Jika Anda memindahkan proyek ini ke laptop/komputer lain, ikuti langkah-langkah di bawah ini:
 
-| Guide                                                 | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- |
-| 📘 **[FEATURES_GUIDE.md](FEATURES_GUIDE.md)**         | **FULL OVERVIEW** of all available features.          |
-| 🛠 **[DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md)**   | **CODING STANDARDS** and how to add new modules.      |
-| 🕵️ **[ACTIVITY_LOG_GUIDE.md](ACTIVITY_LOG_GUIDE.md)** | Detailed audit trail & user monitoring documentation. |
-| 🔔 **[ALERT_SYSTEM_GUIDE.md](ALERT_SYSTEM_GUIDE.md)** | How to use the global SweetAlert & Toastr system.     |
+### Persyaratan Sistem
+Pastikan laptop tujuan sudah terinstal perangkat lunak berikut:
+- **PHP** (Versi 8.2 atau lebih baru)
+- **Composer**
+- **Node.js** & **NPM**
+- **MySQL / MariaDB** (melalui XAMPP/Laragon/dll)
 
----
+### Langkah-langkah Menjalankan
 
-## 🚀 Quick Start
+1. **Unduh / Pindahkan Proyek**
+   Salin folder proyek ini ke laptop tujuan (jika menggunakan flashdisk) atau *clone* dari Git/GitHub.
 
-### 1. Clone & Install
+2. **Buka Terminal di Folder Proyek**
+   Buka terminal/CMD/PowerShell, arahkan (cd) ke dalam folder proyek ini.
 
-```bash
-git clone https://github.com/ookapratama/base-laravel.git
-cd base-laravel
-composer install && npm install
-```
+3. **Instal Dependensi PHP**
+   Jalankan perintah ini untuk mengunduh semua paket backend:
+   ```bash
+   composer install
+   ```
 
-### 2. Setup Environment
+4. **Instal Dependensi Frontend**
+   Jalankan perintah ini untuk mengunduh paket frontend:
+   ```bash
+   npm install
+   ```
 
-```bash
-cp .env.example .env
-php artisan key:generate
-```
+5. **Salin File Konfigurasi Lingkungan (.env)**
+   Secara *default*, file `.env` tidak ikut disalin saat pindah perangkat. Gandakan file `.env.example` dan ubah namanya menjadi `.env`:
+   - Di Windows (CMD): `copy .env.example .env`
+   - Di Mac/Linux: `cp .env.example .env`
 
-### 3. Setup Database & Assets
+6. **Generate Application Key**
+   Hasilkan kunci keamanan baru untuk Laravel:
+   ```bash
+   php artisan key:generate
+   ```
 
-```bash
-php artisan migrate:fresh --seed
-npm run build
-```
+7. **Konfigurasi Database**
+   Buka aplikasi XAMPP/Laragon Anda dan pastikan MySQL sudah menyala.
+   - Buat database kosong baru, misalnya dengan nama `sim_inventory`.
+   - Buka file `.env` pada proyek ini, dan ubah pengaturan database agar sesuai, contoh:
+     ```env
+     DB_CONNECTION=mysql
+     DB_HOST=127.0.0.1
+     DB_PORT=3306
+     DB_DATABASE=sim_inventory
+     DB_USERNAME=root
+     DB_PASSWORD=
+     ```
 
-### 4. Run the Project
+8. **Migrasi dan Seed Database**
+   Jalankan perintah ini untuk membuat struktur tabel dan mengisi data awal (akun Admin & dummy role):
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
 
-```bash
-# Using the built-in shortcut
-composer dev
-```
+9. **Jalankan Aplikasi**
+   Untuk menyalakan *server* lokal, jalankan 2 perintah ini di terminal yang **berbeda**:
+   
+   Terminal 1 (Backend PHP):
+   ```bash
+   php artisan serve
+   ```
+   
+   Terminal 2 (Frontend Assets - Vite):
+   ```bash
+   npm run dev
+   ```
 
----
-
-## 💡 Pro Tip: Creating a New Feature
-
-Want to create a new module (e.g., Product)? Use our custom generator:
-
-```bash
-# Basic usage
-php artisan make:feature Product
-
-# With subdirectory support
-php artisan make:feature Admin/User
-```
-
-This scaffolding includes Repository, Service, Controller, Request, and **full CRUD Blade views**. See **[DEVELOPMENT_GUIDE.md](DEVELOPMENT_GUIDE.md)** for details.
-
----
-
-## 📦 Tech Stack
-
--   **Backend**: Laravel 12.x, PHP 8.2+
--   **Frontend**: Bootstrap 5, Vite, jQuery (Sneat Template)
--   **Database**: MySQL / PostgreSQL / SQLite
--   **API Docs**: Swagger (L5-Swagger)
--   **System**: PHP 8.2+ Type Safety & Modern Features
-
----
-
-## 💖 Support & Sponsoring
-
-If you find this project useful, please consider supporting its development. Your support helps keep the project active and allows me to create more open-source tools.
-
--   **GitHub Sponsors**: [Sponsor @ookapratama](https://github.com/sponsors/ookapratama)
--   **Buy Me a Coffee**: [buymeacoffee.com/ookapratama](https://www.buymeacoffee.com/ookapratama)
-
-For Indonesian supporters:
-
--   **Trakteer**: [trakteer.id/ookapratama](https://trakteer.id/ftopxczkt5voq7rg0zyn/gift)
+10. **Akses Aplikasi**
+    Buka *browser* (Chrome/Edge/Firefox), lalu akses alamat: 
+    👉 **http://localhost:8000**
 
 ---
 
-## 📄 License
+### 🔑 Akun Default (Login Awal)
+Setelah instalasi berhasil, Anda bisa login menggunakan akun bawaan berikut:
 
-This project is open-sourced software licensed under the [MIT license](LICENSE).
+- **Email:** `superadmin@gmail.com` atau `admin@gmail.com`
+- **Password:** `password`
 
-_Developed with ❤️ by [Ooka Pratama](https://github.com/ookapratama)_
+*(Pastikan untuk mengganti password dari menu Profil setelah berhasil login).*

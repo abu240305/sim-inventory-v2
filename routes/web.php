@@ -5,7 +5,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProductsController;
+
 
 // Auth Routes
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');
@@ -27,11 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('permission', [\App\Http\Controllers\PermissionController::class, 'index'])->name('permission.index')->middleware('check.permission:permission.index');
     Route::put('permission', [\App\Http\Controllers\PermissionController::class, 'update'])->name('permission.update')->middleware('check.permission:permission.index');
 
-    // Products CRUD routes
-    Route::get('products/export/excel', [ProductsController::class, 'exportExcel'])->name('products.export.excel')->middleware('check.permission:products.index');
-    Route::get('products/export/pdf', [ProductsController::class, 'exportPdf'])->name('products.export.pdf')->middleware('check.permission:products.index');
-    Route::post('products/import/excel', [ProductsController::class, 'importExcel'])->name('products.import.excel')->middleware('check.permission:products.index');
-    Route::resource('products', ProductsController::class)->middleware('check.permission:products.index');
+
 
     // Activity Log
     Route::get('activity-log', [\App\Http\Controllers\ActivityLogController::class, 'index'])->name('activity-log.index');

@@ -11,3 +11,6 @@ Artisan::command('inspire', function () {
 
 // Jadwalkan backup database setiap hari jam 00:00 (tengah malam)
 Schedule::command('backup:run --only-db')->dailyAt('00:00');
+
+// Bersihkan file backup lama setiap hari jam 01:00 pagi
+Schedule::command('backup:clean')->dailyAt('01:00');
