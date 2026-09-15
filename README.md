@@ -65,17 +65,10 @@ Pastikan laptop tujuan sudah terinstal perangkat lunak berikut:
    php artisan migrate:fresh --seed
    ```
 
-9. **Jalankan Aplikasi**
-   Untuk menyalakan *server* lokal, jalankan 2 perintah ini di terminal yang **berbeda**:
-   
-   Terminal 1 (Backend PHP):
+9. **Jalankan Aplikasi (Satu Perintah Saja!)**
+   Untuk menyalakan *server* lokal secara menyeluruh (gabungan dari *backend* PHP dan *frontend* Vite), Anda kini cukup menjalankan SATU perintah saja di terminal:
    ```bash
-   php artisan serve
-   ```
-   
-   Terminal 2 (Frontend Assets - Vite):
-   ```bash
-   npm run dev
+   npm run start
    ```
 
 10. **Akses Aplikasi**
