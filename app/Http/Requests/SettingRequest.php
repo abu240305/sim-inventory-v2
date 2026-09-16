@@ -8,7 +8,7 @@ class SettingRequest extends BaseRequest
     {
         return [
             'app_logo' => 'nullable|image|mimes:jpeg,png,jpg|max:800',
-            'app_favicon' => 'nullable|file|mimes:ico,png|max:800',
+            'app_favicon' => 'nullable|file|mimes:ico,png,jpg,jpeg|max:800',
             'app_name' => 'nullable|string|max:255',
             'app_description' => 'nullable|string|max:255',
             'app_keywords' => 'nullable|string|max:255',

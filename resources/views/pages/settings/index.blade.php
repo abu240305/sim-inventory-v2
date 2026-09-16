@@ -66,7 +66,7 @@
                                           <div class="button-wrapper">
                                              <input type="file" name="{{ $setting->key }}"
                                                 class="form-control form-control-sm">
-                                             <div class="text-muted small mt-1">Hanya JPG atau PNG. Maks 800KB.</div>
+                                             <div class="text-muted small mt-1">Hanya JPG, PNG, atau ICO. Maks 800KB.</div>
                                           </div>
                                        </div>
                                     @endif
