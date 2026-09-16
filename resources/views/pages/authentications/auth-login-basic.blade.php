@@ -77,52 +77,13 @@
                            @enderror
                         </div>
                      </div>
-                     <div class="mb-5 d-flex justify-content-between mt-5">
-                        <div class="form-check mt-2">
-                           <input class="form-check-input" type="checkbox" id="remember-me" name="remember">
-                           <label class="form-check-label" for="remember-me">
-                              Remember Me
-                           </label>
-                        </div>
-                        <a href="javascript:void(0);" class="float-end mb-1 mt-2">
-                           <span>Forgot Password?</span>
-                        </a>
-                     </div>
+
                      <div class="mb-5">
                         <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                      </div>
                   </form>
 
-                  @if (get_setting('allow_registration', '1') === '1')
-                     <p class="text-center">
-                        <span>New on our platform?</span>
-                        <a href="{{ route('register') }}">
-                           <span>Create an account</span>
-                        </a>
-                     </p>
-                  @endif
 
-                  <div class="divider my-5">
-                     <div class="divider-text">or</div>
-                  </div>
-
-                  <div class="d-flex justify-content-center gap-2">
-                     <a href="javascript:;" class="btn btn-icon rounded-circle btn-text-facebook">
-                        <i class="tf-icons ri-facebook-fill"></i>
-                     </a>
-
-                     <a href="javascript:;" class="btn btn-icon rounded-circle btn-text-twitter">
-                        <i class="tf-icons ri-twitter-fill"></i>
-                     </a>
-
-                     <a href="javascript:;" class="btn btn-icon rounded-circle btn-text-github">
-                        <i class="tf-icons ri-github-fill"></i>
-                     </a>
-
-                     <a href="javascript:;" class="btn btn-icon rounded-circle btn-text-google-plus">
-                        <i class="tf-icons ri-google-fill"></i>
-                     </a>
-                  </div>
                </div>
             </div>
             <!-- /Login -->
