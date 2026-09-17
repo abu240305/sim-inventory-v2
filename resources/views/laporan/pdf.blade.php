@@ -9,7 +9,7 @@
         .subtitle { font-size: 12px; margin-top: 5px; color: #555; }
         table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         th, td { border: 1px solid #333; padding: 6px; text-align: left; }
-        th { background-color: #f2f2f2; font-weight: bold; }
+        th { background-color: #f2f2f2; font-weight: bold; text-align: center; }
         .text-center { text-align: center; }
         .footer { margin-top: 30px; text-align: right; }
     </style>
@@ -17,17 +17,38 @@
 <body>
 
     <div class="header">
-        <p class="title">
-            @if($jenis == 'stok') Laporan Stok Barang
-            @elseif($jenis == 'masuk') Laporan Transaksi Barang Masuk
-            @else Laporan Transaksi Barang Keluar
-            @endif
-        </p>
-        @if($jenis != 'stok')
-            <p class="subtitle">Periode: {{ \Carbon\Carbon::parse($tanggal_mulai)->format('d/m/Y') }} s/d {{ \Carbon\Carbon::parse($tanggal_akhir)->format('d/m/Y') }}</p>
-        @else
-            <p class="subtitle">Per Tanggal: {{ date('d/m/Y H:i') }}</p>
-        @endif
+        <table style="width: 100%; border: none; margin-top: 0; padding: 0;">
+            <tr style="border: none;">
+                <td style="border: none; width: 15%; text-align: center; padding: 0;">
+                    @php
+                        $appLogo = get_setting('app_logo');
+                        $path = $appLogo ? public_path('storage/' . $appLogo) : null;
+                        $base64 = '';
+                        if ($path && file_exists($path)) {
+                            $type = pathinfo($path, PATHINFO_EXTENSION);
+                            $imgData = file_get_contents($path);
+                            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imgData);
+                        }
+                    @endphp
+                    @if($base64)
+                        <img src="{{ $base64 }}" alt="Logo Aplikasi" style="width: 70px; height: auto;">
+                    @endif
+                </td>
+                <td style="border: none; width: 85%; text-align: center; padding: 0; padding-right: 15%;">
+                    <p class="title" style="margin-bottom: 5px; font-size: 18px;">
+                        @if($jenis == 'stok') LAPORAN STOK BARANG
+                        @elseif($jenis == 'masuk') LAPORAN TRANSAKSI BARANG MASUK
+                        @else LAPORAN TRANSAKSI BARANG KELUAR
+                        @endif
+                    </p>
+                    @if($jenis != 'stok')
+                        <p class="subtitle">Periode: {{ \Carbon\Carbon::parse($tanggal_mulai)->format('d/m/Y') }} s/d {{ \Carbon\Carbon::parse($tanggal_akhir)->format('d/m/Y') }}</p>
+                    @else
+                        <p class="subtitle">Per Tanggal: {{ date('d/m/Y H:i') }}</p>
+                    @endif
+                </td>
+            </tr>
+        </table>
     </div>
 
     <table>

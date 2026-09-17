@@ -8,8 +8,14 @@ use App\Models\BarangKeluar;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
-class LaporanExport implements FromCollection, WithHeadings, WithMapping
+class LaporanExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, WithStyles
 {
     protected $jenis;
     protected $tanggal_mulai;
@@ -83,5 +89,45 @@ class LaporanExport implements FromCollection, WithHeadings, WithMapping
                 $row->lokasi,
             ];
         }
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        $lastRow = $sheet->getHighestRow();
+        $lastCol = $sheet->getHighestColumn();
+        
+        // Header style
+        $sheet->getStyle('A1:' . $lastCol . '1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'color' => ['argb' => 'FFFFFFFF'],
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'color' => ['argb' => 'FF1A2A44'], // Navy / dark blue similar to BBWS theme
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ]
+        ]);
+
+        // Border and Alignment for all data
+        if ($lastRow > 1) {
+            $sheet->getStyle('A1:' . $lastCol . $lastRow)->applyFromArray([
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => Border::BORDER_THIN,
+                        'color' => ['argb' => 'FF000000'],
+                    ],
+                ],
+                'alignment' => [
+                    'horizontal' => Alignment::HORIZONTAL_CENTER,
+                    'vertical' => Alignment::VERTICAL_CENTER,
+                ]
+            ]);
+        }
+
+        return [];
     }
 }
