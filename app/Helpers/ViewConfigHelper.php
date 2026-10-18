@@ -23,7 +23,7 @@ class ViewConfigHelper
       'hasCustomizer' => true,
       'showDropdownOnHover' => true,
       'displayCustomizer' => true,
-      'contentLayout' => 'compact',
+      'contentLayout' => 'wide',
       'headerType' => 'fixed',
       'navbarType' => 'fixed',
       'menuFixed' => true,

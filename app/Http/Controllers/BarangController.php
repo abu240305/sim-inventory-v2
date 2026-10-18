@@ -8,10 +8,33 @@ use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $barangs = Barang::with('kategori')->latest()->get();
-        return view('barang.index', compact('barangs'));
+        $selectedJenis = $request->query('jenis');
+
+        $query = Barang::with('kategori');
+
+        if ($selectedJenis && in_array($selectedJenis, ['alat', 'bahan'])) {
+            $query->where('jenis', $selectedJenis);
+        }
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_barang', 'like', "%{$search}%")
+                  ->orWhere('kode_barang', 'like', "%{$search}%")
+                  ->orWhere('merk_tipe', 'like', "%{$search}%")
+                  ->orWhere('lokasi', 'like', "%{$search}%");
+            });
+        }
+
+        $barangs = $query->latest()->get();
+
+        $totalSemua = Barang::count();
+        $totalAlat = Barang::where('jenis', 'alat')->count();
+        $totalBahan = Barang::where('jenis', 'bahan')->count();
+
+        return view('barang.index', compact('barangs', 'selectedJenis', 'totalSemua', 'totalAlat', 'totalBahan'));
     }
 
     public function create()
@@ -25,6 +48,9 @@ class BarangController extends Controller
         $request->validate([
             'kode_barang' => 'required|string|max:255|unique:barangs',
             'nama_barang' => 'required|string|max:255',
+            'jenis' => 'required|in:alat,bahan',
+            'merk_tipe' => 'nullable|string|max:255',
+            'satuan' => 'required|string|max:50',
             'kategori_id' => 'required|exists:kategoris,id',
             'kondisi' => 'nullable|string|max:255',
             'lokasi' => 'nullable|string|max:255',
@@ -33,6 +59,9 @@ class BarangController extends Controller
         Barang::create([
             'kode_barang' => $request->kode_barang,
             'nama_barang' => $request->nama_barang,
+            'jenis' => $request->jenis,
+            'merk_tipe' => $request->merk_tipe,
+            'satuan' => $request->satuan,
             'kategori_id' => $request->kategori_id,
             'kondisi' => $request->kondisi,
             'lokasi' => $request->lokasi,
@@ -53,6 +82,9 @@ class BarangController extends Controller
         $request->validate([
             'kode_barang' => 'required|string|max:255|unique:barangs,kode_barang,' . $barang->id,
             'nama_barang' => 'required|string|max:255',
+            'jenis' => 'required|in:alat,bahan',
+            'merk_tipe' => 'nullable|string|max:255',
+            'satuan' => 'required|string|max:50',
             'kategori_id' => 'required|exists:kategoris,id',
             'kondisi' => 'nullable|string|max:255',
             'lokasi' => 'nullable|string|max:255',
@@ -61,6 +93,9 @@ class BarangController extends Controller
         $barang->update([
             'kode_barang' => $request->kode_barang,
             'nama_barang' => $request->nama_barang,
+            'jenis' => $request->jenis,
+            'merk_tipe' => $request->merk_tipe,
+            'satuan' => $request->satuan,
             'kategori_id' => $request->kategori_id,
             'kondisi' => $request->kondisi,
             'lokasi' => $request->lokasi,

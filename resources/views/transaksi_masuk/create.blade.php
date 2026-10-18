@@ -25,7 +25,7 @@
             <option value="">-- Pilih Barang --</option>
             @foreach($barangs as $barang)
                 <option value="{{ $barang->id }}" {{ old('barang_id') == $barang->id ? 'selected' : '' }}>
-                    {{ $barang->kode_barang }} - {{ $barang->nama_barang }}
+                    {{ $barang->kode_barang }} - {{ $barang->nama_barang }} [{{ $barang->jenis == 'alat' ? 'Alat' : 'Bahan' }}] (Satuan: {{ $barang->satuan ?? 'Unit' }})
                 </option>
             @endforeach
         </select>

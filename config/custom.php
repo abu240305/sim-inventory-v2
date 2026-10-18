@@ -10,7 +10,7 @@ return [
         'hasCustomizer' => true,
         'showDropdownOnHover' => true,
         'displayCustomizer' => true,
-        'contentLayout' => 'compact', // Options: 'compact', 'wide'
+        'contentLayout' => 'wide', // Options: 'compact', 'wide'
         'headerType' => 'fixed', // Options: 'fixed', 'static'
         'navbarType' => 'fixed', // Options: 'fixed', 'static', 'hidden'
         'menuFixed' => true,

@@ -55,8 +55,15 @@ Route::middleware(['auth'])->group(function () {
     // SIM Inventaris Routes (Phase 1)
     Route::resource('kategori', \App\Http\Controllers\KategoriController::class);
     Route::resource('barang', \App\Http\Controllers\BarangController::class);
-    Route::resource('transaksi-masuk', \App\Http\Controllers\TransaksiMasukController::class)->only(['index', 'create', 'store']);
-    Route::resource('transaksi-keluar', \App\Http\Controllers\TransaksiKeluarController::class)->only(['index', 'create', 'store']);
+    Route::resource('transaksi-masuk', \App\Http\Controllers\TransaksiMasukController::class);
+    Route::get('transaksi-keluar/{id}/cetak-form', [\App\Http\Controllers\TransaksiKeluarController::class, 'cetakForm'])->name('transaksi-keluar.cetak-form');
+    Route::post('transaksi-keluar/{id}/retur', [\App\Http\Controllers\TransaksiKeluarController::class, 'retur'])->name('transaksi-keluar.retur');
+    Route::resource('transaksi-keluar', \App\Http\Controllers\TransaksiKeluarController::class);
+    
+    // SIM Inventaris - Modul Peminjaman & Pengembalian Alat (Dokumen 2)
+    Route::get('peminjaman/{id}/cetak-berita-acara', [\App\Http\Controllers\PeminjamanController::class, 'cetakBeritaAcara'])->name('peminjaman.cetak-berita-acara');
+    Route::post('peminjaman/{id}/kembalikan', [\App\Http\Controllers\PeminjamanController::class, 'kembalikan'])->name('peminjaman.kembalikan');
+    Route::resource('peminjaman', \App\Http\Controllers\PeminjamanController::class);
     
     // SIM Inventaris Routes (Phase 2 - Laporan)
     Route::get('laporan', [\App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');

@@ -18,6 +18,7 @@ class InventoryMenuSeeder extends Seeder
             ['name' => 'Transaksi', 'slug' => 'transaksi', 'path' => null, 'icon' => 'ri-exchange-box-line', 'order_no' => 11],
             ['parent' => 'Transaksi', 'name' => 'Barang Masuk', 'slug' => 'transaksi-masuk.index', 'path' => '/transaksi-masuk', 'icon' => 'ri-arrow-right-down-line', 'order_no' => 1],
             ['parent' => 'Transaksi', 'name' => 'Barang Keluar', 'slug' => 'transaksi-keluar.index', 'path' => '/transaksi-keluar', 'icon' => 'ri-arrow-right-up-line', 'order_no' => 2],
+            ['parent' => 'Transaksi', 'name' => 'Peminjaman Alat', 'slug' => 'peminjaman.index', 'path' => '/peminjaman', 'icon' => 'ri-hand-coin-line', 'order_no' => 3],
             ['name' => 'Laporan', 'slug' => 'laporan.index', 'path' => '/laporan', 'icon' => 'ri-file-chart-line', 'order_no' => 12],
         ];
 

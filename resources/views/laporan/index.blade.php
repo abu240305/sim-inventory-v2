@@ -55,7 +55,7 @@
     @endif
   </div>
   <div class="card-body">
-    <div class="table-responsive text-nowrap">
+    <div class="table-responsive">
       <table class="table table-bordered">
         <thead class="table-light">
           @if($jenis == 'masuk')

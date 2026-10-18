@@ -13,14 +13,14 @@ class SettingSeeder extends Seeder
             // General
             [
                 'key' => 'app_name',
-                'value' => 'Base Laravel',
+                'value' => 'SIMBAR BBWS',
                 'group' => 'general',
                 'type' => 'text',
                 'label' => 'Nama Aplikasi',
             ],
             [
                 'key' => 'app_description',
-                'value' => 'Base project builder untuk project Ooka Pratama.',
+                'value' => 'Sistem Informasi Manajemen Barang & Alat - Unit Hidrologi dan Kualitas Air BBWS Pompengan Jeneberang.',
                 'group' => 'general',
                 'type' => 'textarea',
                 'label' => 'Deskripsi Aplikasi',

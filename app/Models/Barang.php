@@ -14,6 +14,21 @@ class Barang extends Model
     protected $guarded = [];
 
 
+    public function scopeAlat($query)
+    {
+        return $query->where('jenis', 'alat');
+    }
+
+    public function scopeBahan($query)
+    {
+        return $query->where('jenis', 'bahan');
+    }
+
+    public function getJenisLabelAttribute()
+    {
+        return $this->jenis === 'alat' ? 'Alat / Instrumen' : 'Bahan / Material';
+    }
+
     public function kategori()
     {
         return $this->belongsTo(Kategori::class);
